@@ -1,3 +1,6 @@
+Modificação do plugin original para compatibilidade com o Paid Membership Pro 
+
+
 # Hotmart Criador de Membros WebHook (Hotmart Member Creator WebHook) Beta 1.0
 Um Plugin para WordPress que realiza a integração com o WebHook do Hotmart. O plugin tem como função criar um usuário em seu blog quando o cliente efetivar uma compra de algum curso.
 Estão presentes neste plugin as seguintes funcionalidades:
