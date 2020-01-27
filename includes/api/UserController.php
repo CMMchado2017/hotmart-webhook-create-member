@@ -72,14 +72,14 @@ class UserController
             //TODO: Melhorar esta abordagem, pois a intenção é mapear um reenvio do hotmart.
             // Talvez a solução seria quebrar em novos métodos e validar corretamente os possíveis cenários.
 
+			//global $wpdb;
             $user = get_user_by( 'email', $obj["email"] );
             wp_set_password( $obj['password'], $user->ID );
 
-			//global $wpdb;
 			//$membership_id = '2';
 
 			//$wpdb->update("wpxk_pmpro_memberships_users", array(
-			//		'membership_id' => '2'
+			//		'membership_id' => $membership_id
 			//	), array(
 			//		'user_id' => $user->ID
 			//	)
@@ -113,6 +113,8 @@ class UserController
 
 			$membership_id = '2';
 
+
+
 			$wpdb->insert("wpxk_pmpro_memberships_users", array(
 			   "user_id" => $user->ID,
 			   "membership_id" => '2',
@@ -126,7 +128,7 @@ class UserController
 			   "trial_limit" => '0',
 			   "status" => 'active',
 			   "startdate" => current_time('mysql', 1),
-			   "enddate" => current_time('mysql', 1)
+			   "enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
 			));
         }
 
@@ -136,11 +138,12 @@ class UserController
     private function delete_user($obj) {
         require_once( ABSPATH.'wp-admin/includes/user.php' );
         if (email_exists($obj["email"])) {
+			global $wpdb;
+
             $user =  get_user_by( "email", $obj['email'] );
             //wp_delete_user( $user->ID );
             //atualizar na tabela
 
-			global $wpdb;
 			$membership_id = '0';
 
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
