@@ -72,19 +72,27 @@ class UserController
             //TODO: Melhorar esta abordagem, pois a intenção é mapear um reenvio do hotmart.
             // Talvez a solução seria quebrar em novos métodos e validar corretamente os possíveis cenários.
 
-			//global $wpdb;
+			global $wpdb;
             $user = get_user_by( 'email', $obj["email"] );
             wp_set_password( $obj['password'], $user->ID );
 
-			//$membership_id = '2';
+            if ($obj['xcod'] == 1) {
+              $membership_id = '1'
+            else if ($obj['xcod'] == 2) {
+              $membership_id = '2'
+            } else if ($obj['xcod'] == 3) {
+              $membership_id = '3'
+            } else {
+              $membership_id = '4'
+            }
 
-			//$wpdb->update("wpxk_pmpro_memberships_users", array(
-			//		'membership_id' => $membership_id
-			//	), array(
-			//		'user_id' => $user->ID
-			//	)
-			//);
-
+			$wpdb->update("wpxk_pmpro_memberships_users", array(
+					'membership_id' => $membership_id,
+					"enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
+				), array(
+					'user_id' => $user->ID
+				)
+			);
 
 
         } else {
@@ -101,23 +109,19 @@ class UserController
             wp_insert_user($userdata);
             $user = get_user_by( 'email', $obj["email"] );
 
-            //if ($obj['prod'] == 12450) {
-            //  $membership_id = '1'
-            //} else if ($obj['prod'] == 12451) {
-            //  $membership_id = '2'
-            //} else if ($obj['prod'] == 12451) {
-            //  $membership_id = '3'
-            //} else {
-            //  $membership_id = '4'
-            //}
-
-			$membership_id = '2';
-
-
+            if ($obj['xcod'] == 1) {
+              $membership_id = '1'
+            else if ($obj['xcod'] == 2) {
+              $membership_id = '2'
+            } else if ($obj['xcod'] == 3) {
+              $membership_id = '3'
+            } else {
+              $membership_id = '4'
+            }
 
 			$wpdb->insert("wpxk_pmpro_memberships_users", array(
 			   "user_id" => $user->ID,
-			   "membership_id" => '2',
+			   "membership_id" => $membership_id,
 			   "code_id" => '0',
 			   "initial_payment" => '0.00',
 			   "billing_amount" => '0.00',
@@ -138,16 +142,14 @@ class UserController
     private function delete_user($obj) {
         require_once( ABSPATH.'wp-admin/includes/user.php' );
         if (email_exists($obj["email"])) {
+
 			global $wpdb;
-
-            $user =  get_user_by( "email", $obj['email'] );
-            //wp_delete_user( $user->ID );
-            //atualizar na tabela
-
+            $user = get_user_by( "email", $obj['email'] );
 			$membership_id = '0';
 
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
-					'membership_id' => $membership_id
+					'membership_id' => $membership_id,
+					"enddate" => current_time('mysql', 1)
 				), array(
 					'user_id' => $user->ID
 				)
