@@ -77,13 +77,13 @@ class UserController
             wp_set_password( $obj['password'], $user->ID );
 
             if ($obj['xcod'] == 1) {
-              $membership_id = '1'
+              $membership_id = '1';
             } else if ($obj['xcod'] == 2) {
-              $membership_id = '2'
+              $membership_id = '2';
             } else if ($obj['xcod'] == 3) {
-              $membership_id = '3'
+              $membership_id = '3';
             } else {
-              $membership_id = '4'
+              $membership_id = '4';
             }
 
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
@@ -110,13 +110,13 @@ class UserController
             $user = get_user_by( 'email', $obj["email"] );
 
             if ($obj['xcod'] == 1) {
-              $membership_id = '1'
+              $membership_id = '1';
             } else if ($obj['xcod'] == 2) {
-              $membership_id = '2'
+              $membership_id = '2';
             } else if ($obj['xcod'] == 3) {
-              $membership_id = '3'
+              $membership_id = '3';
             } else {
-              $membership_id = '4'
+              $membership_id = '4';
             }
 
 			$wpdb->insert("wpxk_pmpro_memberships_users", array(
