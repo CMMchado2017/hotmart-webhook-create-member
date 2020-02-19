@@ -78,7 +78,7 @@ class UserController
 
             if ($obj['xcod'] == 1) {
               $membership_id = '1'
-            else if ($obj['xcod'] == 2) {
+            } else if ($obj['xcod'] == 2) {
               $membership_id = '2'
             } else if ($obj['xcod'] == 3) {
               $membership_id = '3'
@@ -111,7 +111,7 @@ class UserController
 
             if ($obj['xcod'] == 1) {
               $membership_id = '1'
-            else if ($obj['xcod'] == 2) {
+            } else if ($obj['xcod'] == 2) {
               $membership_id = '2'
             } else if ($obj['xcod'] == 3) {
               $membership_id = '3'
