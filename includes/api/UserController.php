@@ -50,10 +50,10 @@ class UserController
                         $this->delete_user($obj);
                     break;
                     case 'chargeback':
-                        $this->delete_user($obj);
+                        //$this->delete_user($obj);
                     break;
                     case 'refunded':
-                        $this->delete_user($obj);
+                        //$this->delete_user($obj);
                     break;
                 }
             } else {
