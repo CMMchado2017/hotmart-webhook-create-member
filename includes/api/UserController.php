@@ -83,7 +83,7 @@ class UserController
             } else if ($obj['xcod'] == 3) {
               $membership_id = '3';
             } else {
-              $membership_id = '4';
+              $membership_id = '1';
             }
 
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
@@ -116,7 +116,7 @@ class UserController
             } else if ($obj['xcod'] == 3) {
               $membership_id = '3';
             } else {
-              $membership_id = '4';
+              $membership_id = '1';
             }
 
 			$wpdb->insert("wpxk_pmpro_memberships_users", array(
