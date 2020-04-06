@@ -46,6 +46,12 @@ class UserController
                     case 'approved':
                         $this->create_user($obj);
                     break;
+                    case 'billet_printed':
+                        $this->create_user($obj);
+                    break;
+                    case 'completed':
+                        $this->create_user($obj);
+                    break;
                     case 'canceled':
                         $this->delete_user($obj);
                     break;
@@ -55,7 +61,17 @@ class UserController
                     case 'refunded':
                         $this->delete_user($obj);
                     break;
-                }
+                };
+
+                switch($obj['signature_status']) {
+                    case 'Active':
+                        $this->create_user($obj);
+                    break;
+                    case 'Started':
+                        $this->create_user($obj);
+                    break;
+                };
+
             } else {
                 status_header(502);
                 wp_send_json("Token Inválido!");
