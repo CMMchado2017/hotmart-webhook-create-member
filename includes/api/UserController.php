@@ -93,7 +93,7 @@ class UserController
 
    	        global $wpdb;
             $user = get_user_by('email',$obj["email"]);
-            wp_set_password( $obj['password'], $user->ID );
+            wp_set_password($obj['password'], $user->ID);
 
             if ($obj['xcod'] == 1) {
               $membership_id = '1';
@@ -108,7 +108,9 @@ class UserController
 
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
 					"membership_id" => $membership_id,
-					"enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
+ 				    "status" => 'active',
+				    "startdate" => current_time('mysql', 1),
+				    "enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
 				), array(
 					"user_id" => $user->ID
 				)
