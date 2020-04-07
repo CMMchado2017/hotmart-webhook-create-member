@@ -83,13 +83,15 @@ class UserController
     }
 
     private function create_user($obj) {
+	    global $wpdb;
         $obj['password'] = wp_generate_password(6, false);
-        if (email_exists($obj["email"])) {
+		
+        if (email_exists($obj['email'])) {
             //TODO: Melhorar esta abordagem, pois a intenção é mapear um reenvio do hotmart.
             // Talvez a solução seria quebrar em novos métodos e validar corretamente os possíveis cenários.
 
-			global $wpdb;
-            $user = get_user_by( 'email', $obj["email"] );
+   	        global $wpdb;
+            $user = get_user_by('email',$obj['email']);
             wp_set_password( $obj['password'], $user->ID );
 
             if ($obj['xcod'] == 1) {
@@ -102,11 +104,12 @@ class UserController
               $membership_id = '1';
             }
 
+			
 			$wpdb->update("wpxk_pmpro_memberships_users", array(
-					'membership_id' => $membership_id,
+					"membership_id" => $membership_id,
 					"enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
 				), array(
-					'user_id' => $user->ID
+					"user_id" => $user->ID
 				)
 			);
 
