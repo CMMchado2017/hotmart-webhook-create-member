@@ -64,10 +64,10 @@ class UserController
                 };
 
                 switch($obj['signature_status']) {
-                    case 'Active':
+                    case 'active':
                         $this->create_user($obj);
                     break;
-                    case 'Started':
+                    case 'started':
                         $this->create_user($obj);
                     break;
                 };
@@ -85,14 +85,14 @@ class UserController
     private function create_user($obj) {
 	    global $wpdb;
         $obj['password'] = wp_generate_password(6, false);
-        $user            = get_user_by('email',$obj["email"]);
+        $user            = get_user_by("email", $obj['email']);
 
         if ($user) {
             //TODO: Melhorar esta abordagem, pois a intenção é mapear um reenvio do hotmart.
             // Talvez a solução seria quebrar em novos métodos e validar corretamente os possíveis cenários.
 
    	        global $wpdb;
-            $user = get_user_by('email',$obj["email"]);
+            $user = get_user_by("email", $obj['email']);
             wp_set_password($obj['password'], $user->ID);
 
             if ($obj['xcod'] == 1) {
@@ -110,7 +110,7 @@ class UserController
 					"membership_id" => $membership_id,
  				    "status" => 'active',
 				    "startdate" => current_time('mysql', 1),
-				    "enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
+				    "enddate" => date('Y-m-d', strtotime($date. ' + 31 days'))
 				), array(
 					"user_id" => $user->ID
 				)
@@ -129,7 +129,7 @@ class UserController
 
 			global $wpdb;
             wp_insert_user($userdata);
-            $user = get_user_by( 'email', $obj["email"] );
+            $user = get_user_by("email", $obj['email']);
 
             if ($obj['xcod'] == 1) {
               $membership_id = '1';
@@ -154,7 +154,7 @@ class UserController
 			   "trial_limit" => '0',
 			   "status" => 'active',
 			   "startdate" => current_time('mysql', 1),
-			   "enddate" => date('Y-m-d', strtotime($date. ' + 30 days'))
+			   "enddate" => date('Y-m-d', strtotime($date. ' + 31 days'))
 			));
         }
 
