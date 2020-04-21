@@ -64,9 +64,6 @@ class UserController
                     case 'active':
                         $this->create_user($obj);
                     break;
-                    case 'started':
-                        $this->create_user($obj);
-                    break;
                 };
 
             } else {
