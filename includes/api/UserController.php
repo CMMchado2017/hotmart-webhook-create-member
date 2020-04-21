@@ -46,9 +46,6 @@ class UserController
                     case 'approved':
                         $this->create_user($obj);
                     break;
-                    case 'billet_printed':
-                        $this->create_user($obj);
-                    break;
                     case 'completed':
                         $this->create_user($obj);
                     break;
